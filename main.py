@@ -289,7 +289,7 @@ def write_log(account, pwd):
     for i in exist_list:
         st = st + str(os.path.basename(i).split('.')[0]) + ','
     with open('jieguo.txt', 'a') as f:
-        f.write(account+'\t'+ pwd+'\t'+st+'\n')
+        f.write(len(exist_list)+'个\t'+st+'\t'+account+'\t'+ pwd+'\n')
 
 def change_acc():
     time.sleep(1)
