@@ -279,6 +279,7 @@ with open('zhanghao.txt','r') as f:
         # if i<47:
         #     continue
         account,password = line.split('\t')[0:2]
+        password = password.strip('\n')
         account_dic[account]=password
 
 for account in account_dic:
