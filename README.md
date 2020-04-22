@@ -13,7 +13,7 @@
 目前的功能只有刷初始号. 以后可能增加新功能. 敬请期待.
 
 
-## 环境
+## 环境&初始化
 python包:
 ```
 pip install opencv-python==3.* -i https://pypi.tuna.tsinghua.edu.cn/simple/
