@@ -1,4 +1,4 @@
-# 公主连结 国服 刷初始脚本 fork of [bbpp222006](https://github.com/bbpp222006/Princess-connection)
+# 公主连结 B服 刷初始脚本 fork of [bbpp222006](https://github.com/bbpp222006/Princess-connection)
 
 ### TODO：
 1. 自动识别验证码  https://github.com/Dawnnnnnn/bilibili-captcha
