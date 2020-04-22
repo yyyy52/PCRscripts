@@ -95,12 +95,14 @@ class Automator:
                     print(name)
                     self.d.click(x, y)
             time.sleep(0.5)
+            return 0
         else:
             if suiji:
                 print('未找到所需的按钮,将点击左上角')
                 self.d.click( 0.1*self.dWidth,  0.1*self.dHeight)
             else:
                 print('未找到所需的按钮,无动作')
+            return -1
 
 
 
@@ -206,6 +208,8 @@ def init_acc():
             print('侦测到加速按钮, 进入战斗模式')
             a.zhandou()
         elif state_flag=='shouye':
+            screen_shot = a.d.screenshot(format="opencv")
+            a.guochang(screen_shot, ['img/guanbi.jpg'],suiji=0)
             print('恭喜完成所有教学内容, 跳出循环')
             break
         else:
@@ -213,11 +217,35 @@ def init_acc():
                                       'img/caidan_tiaoguo.jpg', 'img/dengji.jpg','img/tongyi.jpg','img/niudan_jiasu.jpg']
             a.guochang(screen_shot,template_paths)
 
-
+def shenji():
+    active_list = ['img/maoxian.jpg','img/zhuxianguanqia.jpg','img/1-1.jpg']
+    for active in active_list:
+        flag = -1
+        while flag == -1:
+            screen_shot = a.d.screenshot(format="opencv")
+            flag = a.guochang(screen_shot, [active],suiji=0)
+            time.sleep(1)
+    for i in range(8):
+        screen_shot = a.d.screenshot(format="opencv")
+        a.guochang(screen_shot, ['img/jiasaodang.jpg'],suiji=0)
+        time.sleep(0.2)
+    while 1:
+        time.sleep(1)
+        active_list = ['img/yongsaodang.jpg','img/ok.jpg','img/zhandou_ok.jpg','img/tili_ok.jpg']
+        screen_shot = a.d.screenshot(format="opencv")
+        if a.guochang(screen_shot, ['img/tilihuifu.jpg'],suiji=0) == 0:
+            print('体力耗尽')
+            a.guochang(screen_shot, ['img/quxiao.jpg'],suiji=0)
+            time.sleep(2)
+            a.guochang(screen_shot, ['img/quxiao.jpg'],suiji=0)
+            time.sleep(2)
+            break
+        a.guochang(screen_shot, active_list,suiji=0)
 
 def shouqu():
-
-    active_list = ['img/guanbi.jpg','img/liwu.jpg','img/quanbushouqu.jpg',
+    a.d.click(100,505)
+    time.sleep(2)
+    active_list = ['img/liwu.jpg','img/quanbushouqu.jpg',
                    'img/ok.jpg','img/zhandou_ok.jpg','img/quxiao.jpg']
     for active in active_list:
         screen_shot = a.d.screenshot(format="opencv")
@@ -287,6 +315,8 @@ for account in account_dic:
     print(account, account_dic[account])
     login_auth(account, account_dic[account])
     init_acc()
+    shouqu()
+    shenji()
     shouqu()
     niudan()
     write_log(account, account_dic[account])
