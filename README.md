@@ -1,5 +1,12 @@
 # Princess connection 公主连接
 
+### todolist：
+1. 自动识别验证码  https://github.com/Dawnnnnnn/bilibili-captcha
+2. 自动复制 `/data/data/com.bilibili.priconne/shared_prefs/*` 以保存游客号信息
+3. 到达10级结束刷本而不是用光体力
+4. 多线程
+5. nogui虚拟机运行
+
 ## 简介
 此项目为公主连接脚本. 使用opencv图像识别进行按钮分析.
 
@@ -34,3 +41,4 @@ windows端需要adb工具.
 jieguo.txt是账号上最后三星的结果.
 
 **当前不支持游客号刷初始,各位使用的时候请一定修改zhanghao.txt里的内容**
+**注意：游客号在线时常只有15分钟**
