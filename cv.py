@@ -4,6 +4,7 @@ import matplotlib.pylab as plt
 import os
 import uiautomator2 as u2
 
+debug = 0
 
 def cv_imread(file_path):
     cv_img = cv2.imdecode(np.fromfile(file_path,dtype=np.uint8),-1)
@@ -47,10 +48,11 @@ class UIMatcher:
                 cv2.rectangle(screen_show, (int(max_loc[0]), int(max_loc[1])), (int(max_loc[0]+w),int(max_loc[1]+h)), (0, 0, 255), 2)
                 cv2.putText(screen_show,str(round(max_val, 3))+os.path.basename(template_path),(int(max_loc[0]), int(max_loc[1])-2),cv2.FONT_HERSHEY_SIMPLEX,0.3, (0, 0, 255),1)
         # cv2.rectangle(screen, (0, 0), (10, 10), (0, 0, 255), 2)
-        plt.cla()
-        img4 = cv2.cvtColor(screen_show, cv2.COLOR_BGR2RGB)
-        plt.imshow(img4)
-        plt.pause(0.01)
+        if debug=0:
+            plt.cla()
+            img4 = cv2.cvtColor(screen_show, cv2.COLOR_BGR2RGB)
+            plt.imshow(img4)
+            plt.pause(0.01)
             # if max_val>yuzhi:
             #     match_flag = 1
             # else:
@@ -74,10 +76,12 @@ class UIMatcher:
         screen = cv2.cvtColor(binary, cv2.COLOR_GRAY2RGB)
         cv2.circle(screen, (index_1[1], index_1[0] + 63), 10, (255, 0, 0), -1)
 
-        plt.cla()
-        plt.imshow(screen)
-        plt.pause(0.01)
-        print(len(np.argwhere(binary == 255)),len(np.argwhere(binary == 0)))
+        if debug:
+            plt.cla()
+            plt.imshow(screen)
+            plt.pause(0.01)
+        if debug:
+            print(len(np.argwhere(binary == 255)),len(np.argwhere(binary == 0)))
         return index_1[1]/screen.shape[1], (index_1[0]+63)/screen.shape[0]
 
 

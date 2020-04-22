@@ -4,6 +4,8 @@ from utils import *
 from cv import *
 import matplotlib.pylab as plt
 
+debug = 0
+
 class Automator:
     def __init__(self, auto_task=False, auto_policy=True,
                  auto_goods=False, speedup=True):
@@ -70,10 +72,12 @@ class Automator:
         return_dic = {}
         zhongxings, max_vals = UIMatcher.findpic(screen_shot, template_paths=template_paths)
         for i, name in enumerate(template_paths):
-            print(name + '--' + str(round(max_vals[i], 3)), end=' ')
+            if debug:
+                print(name + '--' + str(round(max_vals[i], 3)), end=' ')
             if max_vals[i]>threshold:
                 return_dic[name]=(zhongxings[i][0] *self.dWidth, zhongxings[i][1] * self.dHeight)
-        print('')
+        if debug:
+            print('')
         return return_dic
 
 
@@ -86,13 +90,15 @@ class Automator:
         template_paths = template_paths
         active_path = self.get_butt_stat(screen_shot,template_paths)
         if active_path:
-            print(active_path)
+            if debug:
+                print(active_path)
             if 'img/caidan_tiaoguo.jpg'in active_path:
                 x,y = active_path['img/caidan_tiaoguo.jpg']
                 self.d.click(x, y)
             else:
                 for name, (x,y) in active_path.items():
-                    print(name)
+                    if debug:
+                        print(name)
                     self.d.click(x, y)
             time.sleep(0.5)
             return 0
@@ -180,10 +186,10 @@ class Automator:
 
 
 
-
-plt.ion()
-fig, ax = plt.subplots(1)
-plt.show()
+if debug:
+    plt.ion()
+    fig, ax = plt.subplots(1)
+    plt.show()
 
 a = Automator()
 a.start()
@@ -284,12 +290,13 @@ def write_log(account, pwd):
         touxiang_path_list.append(base_path+touxiang_path)
     screen_shot = a.d.screenshot(format="opencv")
     exist_list = a.get_butt_stat(screen_shot, touxiang_path_list)
-    print(exist_list)
+    if debug:
+        print(exist_list)
     st = ''
     for i in exist_list:
         st = st + str(os.path.basename(i).split('.')[0]) + ','
     with open('jieguo.txt', 'a') as f:
-        f.write(len(exist_list)+'个\t'+st+'\t'+account+'\t'+ pwd+'\n')
+        f.write(str(len(exist_list))+'个\t'+st+'\t'+account+'\t'+ pwd+'\n')
 
 def change_acc():
     time.sleep(1)
@@ -321,3 +328,5 @@ for account in account_dic:
     niudan()
     write_log(account, account_dic[account])
     change_acc()
+    time.sleep(10)
+print('帐号已用完')
