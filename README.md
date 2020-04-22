@@ -1,8 +1,8 @@
-# Princess connection 公主连接
+# 公主连结 国服 刷初始脚本 fork of [bbpp222006/Princess-connection](https://github.com/bbpp222006/Princess-connection)
 
-### todolist：
+### TODO：
 1. 自动识别验证码  https://github.com/Dawnnnnnn/bilibili-captcha
-2. 自动复制 `/data/data/com.bilibili.priconne/shared_prefs/*` 以保存游客号信息
+2. 自动复制 `/data/data/com.bilibili.priconne/shared_prefs/*` 以保存游客号信息 **注意：游客号在线时常只有15分钟**
 3. 到达10级结束刷本而不是用光体力
 4. 多线程
 5. nogui虚拟机运行
@@ -41,4 +41,7 @@ windows端需要adb工具.
 jieguo.txt是账号上最后三星的结果.
 
 **当前不支持游客号刷初始,各位使用的时候请一定修改zhanghao.txt里的内容**
-**注意：游客号在线时常只有15分钟**
+
+## 使用
+
+`python main.py`
