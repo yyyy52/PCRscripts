@@ -105,11 +105,12 @@ class Automator:
 
 
     def jiaoxue(self,screen_shot):
-        x,y = UIMatcher.find_gaoliang(screen_shot)
         try:
+            x,y = UIMatcher.find_gaoliang(screen_shot)
             self.d.click(x*self.dWidth,y*self.dHeight+20)
         except:
-            pass
+            self.dWidth, self.dHeight = self.d.window_size()
+            self.d.click( 0.1*self.dWidth,  0.1*self.dHeight)
 
     def get_screen_state(self,screen):
         self.dWidth, self.dHeight = self.d.window_size()
